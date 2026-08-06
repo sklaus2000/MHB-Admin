@@ -1,293 +1,741 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Mountain Health Bar Admin</title>
+
   <link rel="stylesheet" href="css/style.css">
+
 </head>
+
 <body>
+
   <div class="app">
+
     <aside class="sidebar">
+
       <div class="logo">
+
         Mountain Health Bar
+
         <span>Admin Dashboard</span>
+
       </div>
+
  
+
       <nav class="admin-navigation" aria-label="Admin navigation">
+
         <button class="nav-link active" type="button" data-page="dashboard">Dashboard</button>
+
         <button class="nav-link" type="button" data-page="menu">Menu</button>
+
         <button class="nav-link" type="button" data-page="opening-hours">Opening Hours</button>
+
         <button class="nav-link" type="button" data-page="qr-codes">QR Codes</button>
+
         <button class="nav-link" type="button" data-page="statistics">Statistics</button>
+
         <button class="nav-link" type="button" data-page="settings">Settings</button>
+
       </nav>
+
     </aside>
+
  
+
     <main class="content">
+
       <section class="admin-page active" id="page-dashboard">
+
         <header class="page-header">
+
           <h1>Dashboard</h1>
+
           <p>Current overview of Mountain Health Bar activity.</p>
+
         </header>
+
  
+
         <section class="dashboard-grid">
+
           <article class="dashboard-card">
+
             <span class="card-label">Today's Requests</span>
+
             <strong class="card-value" id="todayRequests">0</strong>
+
             <span class="card-note">All guest requests today</span>
+
           </article>
+
  
+
           <article class="dashboard-card">
+
             <span class="card-label">Service Calls</span>
+
             <strong class="card-value" id="serviceCalls">0</strong>
+
             <span class="card-note">Requests sent to the service team</span>
+
           </article>
+
  
+
           <article class="dashboard-card">
+
             <span class="card-label">Fresh Towels</span>
+
             <strong class="card-value" id="towelRequests">0</strong>
+
             <span class="card-note">Requests sent to the spa team</span>
+
           </article>
+
  
+
           <article class="dashboard-card status-card">
+
             <span class="card-label">Service Status</span>
+
             <strong class="status-value">
+
               <span class="status-dot" id="serviceStatusDot"></span>
+
               <span id="serviceStatusText">Loading</span>
+
             </strong>
+
             <span class="card-note" id="serviceStatusNote">Checking current opening hours</span>
+
           </article>
+
         </section>
+
  
+
         <section class="latest-requests-section">
+
           <div class="section-toolbar">
+
             <div>
+
               <h2>Latest Requests</h2>
+
               <p>The most recent guest requests from all pool areas.</p>
+
             </div>
+
             <button class="primary-action" type="button" id="refreshRequestsButton">Refresh</button>
+
           </div>
+
  
+
           <div class="latest-requests-list" id="latestRequestsList">
+
             <div class="request-empty-state">Loading latest requests...</div>
+
           </div>
+
         </section>
+
       </section>
+
  
+
       <section class="admin-page" id="page-menu">
+
         <header class="page-header">
+
           <h1>Menu</h1>
+
           <p>View products, prices and visibility.</p>
+
         </header>
+
  
+
         <div class="content-card">
+
           <div class="section-toolbar">
+
             <div>
+
               <h2>Menu Management</h2>
+
               <p>Edit existing products and save changes directly to Google Sheets.</p>
+
             </div>
+
             <button class="primary-action" type="button" id="refreshMenuButton">Refresh</button>
+
           </div>
+
  
+
           <div class="menu-tools">
+
             <label class="search-field" for="menuSearchInput">
+
               <span>Search</span>
+
               <input id="menuSearchInput" type="search" placeholder="Search products...">
+
             </label>
+
  
+
             <label class="filter-field" for="menuCategoryFilter">
+
               <span>Category</span>
+
               <select id="menuCategoryFilter">
+
                 <option value="">All categories</option>
+
               </select>
+
             </label>
+
           </div>
+
  
+
           <div class="table-wrapper">
+
             <table class="admin-table">
+
               <thead>
+
                 <tr>
+
                   <th>Product</th>
+
                   <th>Category</th>
+
                   <th>Volume</th>
+
                   <th>Price</th>
+
                   <th>Visible</th>
+
                   <th>Action</th>
+
                 </tr>
+
               </thead>
+
               <tbody id="menuTableBody">
+
                 <tr><td colspan="6">Loading menu...</td></tr>
+
               </tbody>
+
             </table>
+
           </div>
+
         </div>
+
       </section>
+
  
+
       <section class="admin-page" id="page-opening-hours">
+
         <header class="page-header">
+
           <h1>Opening Hours</h1>
+
           <p>Review the current operating times.</p>
+
         </header>
+
  
+
         <div class="content-card">
-          <div class="form-grid">
-            <div class="form-field">
-              <label for="openingTime">Opening Time</label>
-              <input id="openingTime" type="time" value="11:00">
-            </div>
+
+          <form id="openingHoursForm">
+
+            <div class="form-grid">
+
+              <div class="form-field">
+
+                <label for="openingTime">Opening Time</label>
+
+                <input id="openingTime" type="time" value="11:00" required>
+
+              </div>
+
  
-            <div class="form-field">
-              <label for="closingTime">Closing Time</label>
-              <input id="closingTime" type="time" value="17:00">
+
+              <div class="form-field">
+
+                <label for="closingTime">Closing Time</label>
+
+                <input id="closingTime" type="time" value="17:00" required>
+
+              </div>
+
             </div>
-          </div>
+
  
-          <p class="form-note">Saving directly from the admin page will be activated in the next step.</p>
+
+            <div class="form-actions">
+
+              <p class="form-note" id="openingHoursSaveStatus">
+
+                Times are loaded from Google Sheets.
+
+              </p>
+
+ 
+
+              <button class="primary-action" type="submit" id="saveOpeningHoursButton">
+
+                Save Opening Hours
+
+              </button>
+
+            </div>
+
+          </form>
+
         </div>
+
       </section>
+
  
+
       <section class="admin-page" id="page-qr-codes">
+
         <header class="page-header">
+
           <h1>QR Codes</h1>
-          <p>Guest links for each Mountain Health Bar location.</p>
+
+          <p>Create, test and download the guest QR code for each pool area.</p>
+
         </header>
-        <div class="qr-grid" id="qrCodeList"></div>
-      </section>
+
  
+
+        <div class="content-card qr-manager-card">
+
+          <div class="section-toolbar">
+
+            <div>
+
+              <h2>Guest QR Codes</h2>
+
+              <p>Each code opens the guest website with the correct location selected.</p>
+
+            </div>
+
+ 
+
+            <button class="primary-action" type="button" id="printQrCodesButton">
+
+              Print All QR Codes
+
+            </button>
+
+          </div>
+
+ 
+
+          <div class="qr-grid" id="qrCodeList">
+
+            <div class="request-empty-state">Creating QR codes...</div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+ 
+
       <section class="admin-page" id="page-statistics">
+
         <header class="page-header">
+
           <h1>Statistics</h1>
+
           <p>Request activity and service usage.</p>
+
         </header>
+
  
+
         <div class="content-card">
+
           <div class="empty-state">
+
             <h2>Statistics are being prepared</h2>
+
             <p>Live daily and weekly statistics will be connected to the Requests sheet.</p>
+
           </div>
+
         </div>
+
       </section>
+
  
+
       <section class="admin-page" id="page-settings">
+
         <header class="page-header">
+
           <h1>Settings</h1>
+
           <p>Control website features and announcements.</p>
+
         </header>
+
  
-        <div class="content-card">
-          <div class="setting-row">
-            <div>
-              <h3>Weather Widget</h3>
-              <p>Show current weather on the guest website.</p>
-            </div>
-            <span class="setting-status" id="weatherSettingStatus">Loading</span>
-          </div>
+
+        <form class="settings-form" id="websiteSettingsForm">
+
+          <div class="content-card settings-card">
+
+            <div class="setting-control-row">
+
+              <div>
+
+                <h3>Weather Widget</h3>
+
+                <p>Show current weather on the guest website.</p>
+
+              </div>
+
  
-          <div class="setting-row">
-            <div>
-              <h3>UV Widget</h3>
-              <p>Show the current UV index.</p>
+
+              <label class="switch-control">
+
+                <input id="weatherWidgetActive" type="checkbox">
+
+                <span class="switch-slider" aria-hidden="true"></span>
+
+                <span class="switch-label" id="weatherSettingStatus">Loading</span>
+
+              </label>
+
             </div>
-            <span class="setting-status" id="uvSettingStatus">Loading</span>
-          </div>
+
  
-          <div class="setting-row">
-            <div>
-              <h3>Announcement Banner</h3>
-              <p>Promote events and special activities.</p>
+
+            <div class="setting-control-row">
+
+              <div>
+
+                <h3>UV Widget</h3>
+
+                <p>Show the current UV index on the guest website.</p>
+
+              </div>
+
+ 
+
+              <label class="switch-control">
+
+                <input id="uvWidgetActive" type="checkbox">
+
+                <span class="switch-slider" aria-hidden="true"></span>
+
+                <span class="switch-label" id="uvSettingStatus">Loading</span>
+
+              </label>
+
             </div>
-            <span class="setting-status" id="announcementSettingStatus">Loading</span>
+
           </div>
-        </div>
+
+ 
+
+          <div class="content-card settings-card announcement-card">
+
+            <div class="setting-control-row announcement-heading">
+
+              <div>
+
+                <h3>Announcement Banner</h3>
+
+                <p>Promote events and special activities on the guest website.</p>
+
+              </div>
+
+ 
+
+              <label class="switch-control">
+
+                <input id="announcementActive" type="checkbox">
+
+                <span class="switch-slider" aria-hidden="true"></span>
+
+                <span class="switch-label" id="announcementSettingStatus">Loading</span>
+
+              </label>
+
+            </div>
+
+ 
+
+            <div class="settings-editor-grid">
+
+              <label class="form-field">
+
+                <span>Title EN</span>
+
+                <input id="announcementTitleEn" type="text" maxlength="80">
+
+              </label>
+
+ 
+
+              <label class="form-field">
+
+                <span>Title DE</span>
+
+                <input id="announcementTitleDe" type="text" maxlength="80">
+
+              </label>
+
+ 
+
+              <label class="form-field editor-grid-wide">
+
+                <span>Text EN</span>
+
+                <textarea id="announcementTextEn" rows="3" maxlength="240"></textarea>
+
+              </label>
+
+ 
+
+              <label class="form-field editor-grid-wide">
+
+                <span>Text DE</span>
+
+                <textarea id="announcementTextDe" rows="3" maxlength="240"></textarea>
+
+              </label>
+
+            </div>
+
+          </div>
+
+ 
+
+          <div class="settings-save-bar">
+
+            <p class="form-note" id="websiteSettingsSaveStatus">
+
+              Changes will appear on the guest website after saving.
+
+            </p>
+
+ 
+
+            <button class="primary-action" type="submit" id="saveWebsiteSettingsButton">
+
+              Save Settings
+
+            </button>
+
+          </div>
+
+        </form>
+
       </section>
+
     </main>
+
   </div>
+
  
+
  
+
   <div class="modal-backdrop hidden" id="menuEditorModal" aria-hidden="true">
+
     <section class="menu-editor-modal" role="dialog" aria-modal="true" aria-labelledby="menuEditorTitle">
+
       <div class="modal-header">
+
         <div>
+
           <span class="modal-eyebrow">Menu product</span>
+
           <h2 id="menuEditorTitle">Edit Product</h2>
+
         </div>
+
         <button class="icon-button" type="button" id="closeMenuEditorButton" aria-label="Close editor">×</button>
+
       </div>
+
  
+
       <form id="menuEditorForm">
+
         <input id="menuRowNumber" type="hidden">
+
         <input id="menuItemId" type="hidden">
+
  
+
         <div class="editor-grid">
+
           <label class="form-field">
+
             <span>Name EN</span>
+
             <input id="menuNameEn" type="text" required>
+
           </label>
+
  
+
           <label class="form-field">
+
             <span>Name DE</span>
+
             <input id="menuNameDe" type="text" required>
+
           </label>
+
  
+
           <label class="form-field editor-grid-wide">
+
             <span>Description EN</span>
+
             <textarea id="menuDescriptionEn" rows="3"></textarea>
+
           </label>
+
  
+
           <label class="form-field editor-grid-wide">
+
             <span>Description DE</span>
+
             <textarea id="menuDescriptionDe" rows="3"></textarea>
+
           </label>
+
  
+
           <label class="form-field">
+
             <span>Volume EN</span>
+
             <input id="menuVolumeEn" type="text">
+
           </label>
+
  
+
           <label class="form-field">
+
             <span>Volume DE</span>
+
             <input id="menuVolumeDe" type="text">
+
           </label>
+
  
+
           <label class="form-field">
+
             <span>Category</span>
+
             <select id="menuCategory" required></select>
+
           </label>
+
  
+
           <label class="form-field">
+
             <span>Price in EUR</span>
+
             <input id="menuPrice" type="number" min="0" step="0.1" required>
+
           </label>
+
  
+
           <label class="form-field">
+
             <span>Sort Order</span>
+
             <input id="menuSortOrder" type="number" min="1" step="1" required>
+
           </label>
+
  
+
           <label class="toggle-field">
+
             <input id="menuVisible" type="checkbox">
+
             <span>Visible on guest website</span>
+
           </label>
+
         </div>
+
  
+
         <div class="modal-actions">
+
           <button class="secondary-action" type="button" id="cancelMenuEditorButton">Cancel</button>
+
           <button class="primary-action" type="submit" id="saveMenuItemButton">Save Product</button>
+
         </div>
+
       </form>
+
     </section>
+
   </div>
+
  
+
   <div class="admin-toast" id="adminToast" role="status" aria-live="polite"></div>
+
  
+
   <script src="js/helpers.js"></script>
+
   <script src="js/api.js"></script>
+
   <script src="js/navigation.js"></script>
+
   <script src="js/dashboard.js"></script>
+
   <script src="js/menu.js"></script>
+
   <script src="js/settings.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.1/build/qrcode.min.js"></script>
+
   <script src="js/qr.js"></script>
+
   <script src="js/app.js"></script>
+
 </body>
+
 </html>
