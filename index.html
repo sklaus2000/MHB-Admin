@@ -46,6 +46,14 @@
 
       </nav>
 
+ 
+
+      <button class="logout-button" type="button" id="logoutButton">
+
+        Log Out
+
+      </button>
+
     </aside>
 
  
@@ -884,6 +892,48 @@
 
  
 
+  <div class="security-gate" id="securityGate" aria-hidden="false">
+
+    <section class="security-card" role="dialog" aria-modal="true" aria-labelledby="securityTitle">
+
+      <span class="security-eyebrow">Protected administration</span>
+
+      <h1 id="securityTitle">Mountain Health Bar Admin</h1>
+
+      <p>Enter the private admin access key to continue.</p>
+
+ 
+
+      <form id="securityForm">
+
+        <label class="security-field" for="securityAccessKey">
+
+          <span>Admin access key</span>
+
+          <input id="securityAccessKey" type="password" autocomplete="current-password" required>
+
+        </label>
+
+ 
+
+        <p class="security-error" id="securityError" role="alert"></p>
+
+ 
+
+        <button class="primary-action security-submit" type="submit" id="securitySubmitButton">
+
+          Open Admin
+
+        </button>
+
+      </form>
+
+    </section>
+
+  </div>
+
+ 
+
   <div class="admin-toast" id="adminToast" role="status" aria-live="polite"></div>
 
  
@@ -911,5 +961,4 @@
 </body>
 
 </html>
-
 

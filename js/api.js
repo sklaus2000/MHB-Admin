@@ -84,6 +84,32 @@ async function fetchJson(url) {
 
 async function postJson(payload) {
 
+  const securedPayload = {
+
+    ...payload
+
+  };
+
+ 
+
+  if (
+
+    String(securedPayload.action || "")
+
+      .startsWith("admin") &&
+
+    !securedPayload.adminAccessKey
+
+  ) {
+
+    securedPayload.adminAccessKey =
+
+      getAdminAccessKey();
+
+  }
+
+ 
+
   const response = await fetch(API_BASE_URL, {
 
     method: "POST",
@@ -96,7 +122,7 @@ async function postJson(payload) {
 
     },
 
-    body: JSON.stringify(payload)
+    body: JSON.stringify(securedPayload)
 
   });
 
@@ -120,7 +146,7 @@ async function postJson(payload) {
 
       result?.message ||
 
-      "The changes could not be saved."
+      "The request could not be completed."
 
     );
 
@@ -129,6 +155,32 @@ async function postJson(payload) {
  
 
   return result;
+
+}
+
+ 
+
+function getAdminAccessKey() {
+
+  return sessionStorage.getItem(
+
+    "mhbAdminAccessKey"
+
+  ) || "";
+
+}
+
+ 
+
+async function apiVerifyAdminAccess(accessKey) {
+
+  return await postJson({
+
+    action: "adminVerifyAccess",
+
+    adminAccessKey: accessKey
+
+  });
 
 }
 

@@ -12,7 +12,25 @@
 
  
 
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener(
+
+  "DOMContentLoaded",
+
+  function () {
+
+    initializeSecurity(
+
+      startAdminApplication
+
+    );
+
+  }
+
+);
+
+ 
+
+async function startAdminApplication() {
 
   initializeNavigation();
 
@@ -34,4 +52,5 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   ]);
 
-});
+}
+
