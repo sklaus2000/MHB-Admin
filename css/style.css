@@ -1,0 +1,429 @@
+/* ==========================================================
+   Mountain Health Bar Admin
+   Main Design
+========================================================== */
+
+:root {
+  --color-dark: #111418;
+  --color-dark-soft: #1a1f25;
+  --color-gold: #b99a57;
+  --color-gold-light: #d6be83;
+  --color-cream: #f4efe6;
+  --color-white: #ffffff;
+  --color-text: #1f2933;
+  --color-muted: #7a8088;
+  --color-border: rgba(31, 41, 51, 0.10);
+
+  --sidebar-width: 280px;
+
+  --radius-small: 12px;
+  --radius-medium: 20px;
+
+  --shadow-soft:
+    0 12px 35px rgba(15, 20, 25, 0.08);
+
+  --transition:
+    250ms ease;
+}
+
+
+/* ----------------------------------------------------------
+   RESET
+---------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  min-width: 320px;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color: var(--color-text);
+  background: var(--color-cream);
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* ----------------------------------------------------------
+   APP LAYOUT
+---------------------------------------------------------- */
+
+.app {
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+}
+
+
+/* ----------------------------------------------------------
+   SIDEBAR
+---------------------------------------------------------- */
+
+.sidebar {
+  min-height: 100vh;
+  padding: 38px 24px;
+
+  color: var(--color-white);
+  background:
+    linear-gradient(
+      160deg,
+      #171b20 0%,
+      #0f1216 100%
+    );
+
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.logo {
+  margin-bottom: 48px;
+  padding: 0 12px;
+
+  color: var(--color-gold-light);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.logo span {
+  display: block;
+  margin-top: 8px;
+
+  color: rgba(255, 255, 255, 0.48);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+
+/* ----------------------------------------------------------
+   NAVIGATION
+---------------------------------------------------------- */
+
+.sidebar nav {
+  display: grid;
+  gap: 8px;
+}
+
+.sidebar nav a {
+  padding: 15px 16px;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-small);
+
+  color: rgba(255, 255, 255, 0.64);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    color var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
+}
+
+.sidebar nav a:hover {
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.05);
+
+  transform: translateX(3px);
+}
+
+.sidebar nav a.active {
+  color: var(--color-white);
+
+  border-color: rgba(185, 154, 87, 0.30);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(185, 154, 87, 0.22),
+      rgba(185, 154, 87, 0.08)
+    );
+}
+
+
+/* ----------------------------------------------------------
+   MAIN CONTENT
+---------------------------------------------------------- */
+
+.content {
+  min-width: 0;
+  padding: 54px 60px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(185, 154, 87, 0.08),
+      transparent 28%
+    ),
+    var(--color-cream);
+}
+
+.content header {
+  max-width: 900px;
+}
+
+.content header h1 {
+  margin: 0 0 10px;
+
+  color: var(--color-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(38px, 6vw, 58px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.content header p {
+  margin: 0;
+
+  color: var(--color-muted);
+
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+
+/* ----------------------------------------------------------
+   TABLET
+---------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  :root {
+    --sidebar-width: 230px;
+  }
+
+  .sidebar {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .content {
+    padding: 44px 34px;
+  }
+
+  .logo {
+    font-size: 21px;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   MOBILE
+---------------------------------------------------------- */
+
+@media (max-width: 700px) {
+  .app {
+    display: block;
+  }
+
+  .sidebar {
+    min-height: auto;
+    padding: 18px 16px;
+  }
+
+  .logo {
+    margin-bottom: 18px;
+    padding: 0;
+
+    font-size: 19px;
+  }
+
+  .sidebar nav {
+    display: flex;
+    gap: 8px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+  }
+
+  .sidebar nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar nav a {
+    flex: 0 0 auto;
+    padding: 11px 14px;
+
+    font-size: 12px;
+  }
+
+  .content {
+    padding: 36px 20px;
+  }
+
+  .content header h1 {
+    font-size: 40px;
+  }
+}
+/* ----------------------------------------------------------
+   DASHBOARD CARDS
+---------------------------------------------------------- */
+
+.dashboard-grid {
+  margin-top: 46px;
+
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 22px;
+}
+
+.dashboard-card {
+  min-height: 190px;
+  padding: 28px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+
+  background:
+    rgba(255, 255, 255, 0.82);
+
+  box-shadow: var(--shadow-soft);
+
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(185, 154, 87, 0.32);
+
+  box-shadow:
+    0 18px 45px rgba(15, 20, 25, 0.12);
+}
+
+.card-label {
+  color: var(--color-muted);
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card-value {
+  color: var(--color-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 58px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.card-note {
+  color: var(--color-muted);
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.status-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(26, 31, 37, 0.98),
+      rgba(15, 18, 22, 0.98)
+    );
+
+  border-color:
+    rgba(185, 154, 87, 0.22);
+}
+
+.status-card .card-label,
+.status-card .card-note {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.status-value {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: var(--color-white);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 42px;
+  font-weight: 400;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+
+  background: #7f9d84;
+
+  box-shadow:
+    0 0 0 6px rgba(127, 157, 132, 0.14);
+}
+
+@media (max-width: 850px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-card {
+    min-height: 170px;
+  }
+}
