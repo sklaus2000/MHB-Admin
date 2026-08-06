@@ -30,7 +30,9 @@ const API_URLS = {
 
   categories: `${API_BASE_URL}?action=categories`,
 
-  settings: `${API_BASE_URL}?action=settings`
+  settings: `${API_BASE_URL}?action=settings`,
+
+  statistics: `${API_BASE_URL}?action=statistics`
 
 };
 
@@ -223,3 +225,24 @@ async function apiSaveWebsiteSettings(settings) {
   });
 
 }
+
+ 
+
+/* ----------------------------------------------------------
+
+   STATISTICS
+
+---------------------------------------------------------- */
+
+ 
+
+async function apiStatistics() {
+
+  return await fetchJson(
+
+    API_URLS.statistics
+
+  );
+
+}
+

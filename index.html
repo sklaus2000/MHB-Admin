@@ -370,23 +370,193 @@
 
           <h1>Statistics</h1>
 
-          <p>Request activity and service usage.</p>
+          <p>Request activity and service usage from the Requests sheet.</p>
 
         </header>
 
  
 
-        <div class="content-card">
+        <div class="statistics-toolbar">
 
-          <div class="empty-state">
+          <div>
 
-            <h2>Statistics are being prepared</h2>
+            <h2>Service Overview</h2>
 
-            <p>Live daily and weekly statistics will be connected to the Requests sheet.</p>
+            <p>Live figures are calculated from recorded guest requests.</p>
 
           </div>
 
+ 
+
+          <button class="primary-action" type="button" id="refreshStatisticsButton">
+
+            Refresh Statistics
+
+          </button>
+
         </div>
+
+ 
+
+        <section class="statistics-summary-grid">
+
+          <article class="statistics-card">
+
+            <span class="statistics-label">Today</span>
+
+            <strong class="statistics-value" id="statisticsTodayTotal">0</strong>
+
+            <span class="statistics-note">Requests received today</span>
+
+          </article>
+
+ 
+
+          <article class="statistics-card">
+
+            <span class="statistics-label">Last 7 Days</span>
+
+            <strong class="statistics-value" id="statisticsWeekTotal">0</strong>
+
+            <span class="statistics-note">Requests during the last seven days</span>
+
+          </article>
+
+ 
+
+          <article class="statistics-card">
+
+            <span class="statistics-label">Last 30 Days</span>
+
+            <strong class="statistics-value" id="statisticsMonthTotal">0</strong>
+
+            <span class="statistics-note">Requests during the last thirty days</span>
+
+          </article>
+
+ 
+
+          <article class="statistics-card statistics-highlight-card">
+
+            <span class="statistics-label">Busiest Area</span>
+
+            <strong class="statistics-area-value" id="statisticsTopArea">—</strong>
+
+            <span class="statistics-note" id="statisticsTopAreaNote">No requests available</span>
+
+          </article>
+
+        </section>
+
+ 
+
+        <section class="statistics-content-grid">
+
+          <article class="content-card statistics-panel">
+
+            <div class="statistics-panel-heading">
+
+              <div>
+
+                <h2>Requests by Day</h2>
+
+                <p>The last seven calendar days.</p>
+
+              </div>
+
+            </div>
+
+ 
+
+            <div class="statistics-bars" id="statisticsDailyBars">
+
+              <div class="request-empty-state">Loading statistics...</div>
+
+            </div>
+
+          </article>
+
+ 
+
+          <article class="content-card statistics-panel">
+
+            <div class="statistics-panel-heading">
+
+              <div>
+
+                <h2>Request Types</h2>
+
+                <p>Service calls compared with fresh towel requests.</p>
+
+              </div>
+
+            </div>
+
+ 
+
+            <div class="statistics-type-list">
+
+              <div class="statistics-type-row">
+
+                <div>
+
+                  <strong>Call for Service</strong>
+
+                  <span>Last seven days</span>
+
+                </div>
+
+                <strong class="statistics-type-value" id="statisticsServiceCalls">0</strong>
+
+              </div>
+
+ 
+
+              <div class="statistics-type-row">
+
+                <div>
+
+                  <strong>Fresh Towels</strong>
+
+                  <span>Last seven days</span>
+
+                </div>
+
+                <strong class="statistics-type-value" id="statisticsTowelRequests">0</strong>
+
+              </div>
+
+            </div>
+
+          </article>
+
+ 
+
+          <article class="content-card statistics-panel statistics-area-panel">
+
+            <div class="statistics-panel-heading">
+
+              <div>
+
+                <h2>Requests by Area</h2>
+
+                <p>Distribution during the last seven days.</p>
+
+              </div>
+
+            </div>
+
+ 
+
+            <div class="statistics-area-list" id="statisticsAreaList">
+
+              <div class="request-empty-state">Loading areas...</div>
+
+            </div>
+
+          </article>
+
+        </section>
 
       </section>
 
@@ -730,6 +900,8 @@
 
   <script src="js/settings.js"></script>
 
+  <script src="js/statistics.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.1/build/qrcode.min.js"></script>
 
   <script src="js/qr.js"></script>
@@ -739,3 +911,5 @@
 </body>
 
 </html>
+
+

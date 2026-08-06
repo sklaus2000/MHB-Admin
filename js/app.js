@@ -28,7 +28,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     loadMenu(),
 
-    loadSettings()
+    loadSettings(),
+
+    loadStatistics()
 
   ]);
 
